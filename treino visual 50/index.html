@@ -18,18 +18,19 @@ h1{font-size:clamp(1.4rem,5vw,2rem);margin:0;text-align:center}
 #time{color:var(--red)}
 .stage{width:min(88vw,540px);aspect-ratio:1;position:relative;display:grid;place-items:center;isolation:isolate}
 .ring{position:absolute;inset:0;border-radius:50%;border:1px solid #49617e66;box-shadow:0 0 0 8px #162c461c,0 0 70px #3b79b522;pointer-events:none}
-#board{position:absolute;inset:0;will-change:transform;animation:spin 42s linear infinite;transform-origin:center}
+#board{position:absolute;inset:0;will-change:transform;animation:spin var(--spin-duration,42s) linear infinite;transform-origin:center}
 @keyframes spin{to{transform:rotate(360deg)}}
-.number{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);width:clamp(34px,8.3vw,52px);height:clamp(34px,8.3vw,52px);border:1px solid #dce3ed;border-radius:50%;background:var(--white);color:#101b2c;display:grid;place-items:center;font-size:clamp(.9rem,3.6vw,1.2rem);font-weight:800;box-shadow:0 3px 9px #0004;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;padding:0}
+@keyframes counterspin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(-360deg)}}
+.number{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);animation:counterspin var(--spin-duration,42s) linear infinite;width:clamp(34px,8.3vw,52px);height:clamp(34px,8.3vw,52px);border:1px solid #dce3ed;border-radius:50%;background:var(--white);color:#101b2c;display:grid;place-items:center;font-size:clamp(.9rem,3.6vw,1.2rem);font-weight:800;box-shadow:0 3px 9px #0004;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;padding:0}
 .number:active{scale:.94}.number.found{background:#69e3b0;border-color:#69e3b0;color:#062a20}
-.number.wrong{animation:shake .22s linear}
+.number.wrong{animation:counterspin var(--spin-duration,42s) linear infinite,shake .22s linear}
 @keyframes shake{25%{translate:-3px 0}75%{translate:3px 0}}
 .controls{width:100%;display:flex;gap:10px}
 button.action{flex:1;border:0;border-radius:14px;padding:15px 12px;font-size:1rem;font-weight:800;cursor:pointer;background:#f5f7fb;color:#071426}
 button.action.secondary{background:#1a3454;color:var(--white);border:1px solid #385372}
 #message{min-height:1.5em;text-align:center;color:var(--muted);margin:0}
 .note{font-size:.8rem;color:#8193aa;text-align:center;margin:0}
-@media(prefers-reduced-motion:reduce){#board{animation-duration:120s}}
+@media(prefers-reduced-motion:reduce){:root{--spin-duration:120s}}
 </style>
 </head>
 <body>
