@@ -48,7 +48,7 @@ button.action.secondary{background:#1a3454;color:var(--white);border:1px solid #
 <select id="maxNumber" aria-label="Escolha o número máximo"></select>
 </label>
 <label>Tempo
-<select id="duration"><option value="30">30 segundos</option><option value="60" selected>60 segundos</option><option value="120">120 segundos</option></select>
+<select id="duration" aria-label="Escolha a duração da partida"></select>
 </label>
 <label>Rotação
 <select id="speed"><option value="90">Lenta</option><option value="42" selected>Normal</option><option value="20">Rápida</option></select>
@@ -68,6 +68,7 @@ button.action.secondary{background:#1a3454;color:var(--white);border:1px solid #
 const board=document.querySelector('#board'),nextEl=document.querySelector('#next'),timeEl=document.querySelector('#time'),message=document.querySelector('#message'),startBtn=document.querySelector('#start'),resetBtn=document.querySelector('#reset');
 let next=1,started=false,ended=false,endAt=0,raf=0;
 const maxNumberEl=document.querySelector('#maxNumber'),durationEl=document.querySelector('#duration'),speedEl=document.querySelector('#speed');
+for(let seconds=1;seconds<=300;seconds++){const option=document.createElement('option');option.value=String(seconds);option.textContent=seconds+' '+(seconds===1?'segundo':'segundos');if(seconds===60)option.selected=true;durationEl.appendChild(option)}
 for(let n=10;n<=200;n++){const option=document.createElement('option');option.value=String(n);option.textContent='1 a '+n;if(n===50)option.selected=true;maxNumberEl.appendChild(option)}
 function applySettings(){board.style.setProperty('--spin-duration',speedEl.value+'s');board.classList.toggle('dense',Number(maxNumberEl.value)>=60);}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
