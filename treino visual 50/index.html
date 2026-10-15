@@ -45,7 +45,7 @@ button.action.secondary{background:#1a3454;color:var(--white);border:1px solid #
 <p class="subtitle">Encontre os números em sequência enquanto a roda gira.</p>
 <section class="settings" aria-label="Configurações da partida">
 <label>Até o número
-<select id="maxNumber"><option value="30">1 a 30</option><option value="50" selected>1 a 50</option><option value="60">1 a 60</option><option value="100">1 a 100</option></select>
+<select id="maxNumber" aria-label="Escolha o número máximo"></select>
 </label>
 <label>Tempo
 <select id="duration"><option value="30">30 segundos</option><option value="60" selected>60 segundos</option><option value="120">120 segundos</option></select>
@@ -68,6 +68,7 @@ button.action.secondary{background:#1a3454;color:var(--white);border:1px solid #
 const board=document.querySelector('#board'),nextEl=document.querySelector('#next'),timeEl=document.querySelector('#time'),message=document.querySelector('#message'),startBtn=document.querySelector('#start'),resetBtn=document.querySelector('#reset');
 let next=1,started=false,ended=false,endAt=0,raf=0;
 const maxNumberEl=document.querySelector('#maxNumber'),durationEl=document.querySelector('#duration'),speedEl=document.querySelector('#speed');
+for(let n=10;n<=200;n++){const option=document.createElement('option');option.value=String(n);option.textContent='1 a '+n;if(n===50)option.selected=true;maxNumberEl.appendChild(option)}
 function applySettings(){board.style.setProperty('--spin-duration',speedEl.value+'s');board.classList.toggle('dense',Number(maxNumberEl.value)>=60);}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function makeBoard(){
