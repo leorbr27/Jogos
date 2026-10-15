@@ -73,7 +73,7 @@ for(let n=10;n<=200;n++){const option=document.createElement('option');option.va
 function applySettings(){board.style.setProperty('--spin-duration',speedEl.value+'s');board.classList.toggle('dense',Number(maxNumberEl.value)>=60);}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function makeBoard(){
-cancelAnimationFrame(raf);started=false;ended=false;next=1;nextEl.textContent='1';timeEl.textContent=Number(durationEl.value).toFixed(1).replace('.',',')+' s';startBtn.textContent='Começar partida';board.replaceChildren();applySettings();
+cancelAnimationFrame(raf);board.style.animation='none';void board.offsetWidth;board.style.animation='';started=false;ended=false;next=1;nextEl.textContent='1';timeEl.textContent=Number(durationEl.value).toFixed(1).replace('.',',')+' s';startBtn.textContent='Começar partida';board.replaceChildren();applySettings();
 const maxNumber=Number(maxNumberEl.value),nums=shuffle(Array.from({length:maxNumber},(_,i)=>i+1)),points=[];
 const stageSize=Math.max(540,Math.ceil(320+Math.sqrt(maxNumber)*28));
 board.parentElement.style.setProperty('--stage-size',stageSize+'px');
